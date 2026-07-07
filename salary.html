@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Зарплата — Инженер по эксплуатации сети</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f2f6fc;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 2.5rem 2.8rem 2.8rem;
+            box-shadow: 0 16px 48px rgba(0, 30, 60, 0.06);
+        }
+
+        /* ----- НАВИГАЦИЯ ----- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-bottom: 1.4rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e6edf6;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #0a2647;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: #2c3e5c;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.3rem 0.1rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .navbar-links a.active,
+        .navbar-links a:hover {
+            color: #1a6bc4;
+            border-color: #1a6bc4;
+        }
+
+        /* ----- ЗАГОЛОВОК СТРАНИЦЫ ----- */
+        .page-title {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #0a2647;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+        }
+
+        .page-title .accent {
+            color: #1a6bc4;
+        }
+
+        .page-sub {
+            font-size: 1rem;
+            color: #5b6f87;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e6edf6;
+            padding-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        section {
+            margin-bottom: 2.6rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0a2647;
+            margin-bottom: 0.3rem;
+        }
+
+        .section-sub {
+            color: #5b6f87;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ----- ИЗ ЧЕГО СКЛАДЫВАЕТСЯ ОКЛАД ----- */
+        .components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.4rem;
+        }
+
+        .component-card {
+            flex: 1 1 220px;
+            background: #fafdff;
+            border: 1px solid #e3ecf7;
+            border-radius: 20px;
+            padding: 1.4rem 1.5rem;
+        }
+
+        .component-card .comp-icon {
+            font-size: 1.9rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .component-card .comp-title {
+            font-weight: 600;
+            color: #0a2647;
+            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+        }
+
+        .component-card .comp-text {
+            font-size: 0.92rem;
+            color: #2c3e5c;
+        }
+
+        .component-card .comp-text .highlight {
+            color: #1a6bc4;
+            font-weight: 600;
+        }
+
+        /* ----- ГРАФИКИ РАБОТЫ: СРАВНЕНИЕ ----- */
+        .schedule-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+        }
+
+        .schedule-card {
+            flex: 1 1 320px;
+            background: #fafdff;
+            border: 1px solid #e3ecf7;
+            border-radius: 20px;
+            padding: 1.6rem 1.7rem;
+        }
+
+        .schedule-card h3 {
+            color: #0a2647;
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .schedule-card .schedule-tag {
+            display: inline-block;
+            background: #ebf3fc;
+            color: #1a6bc4;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            margin-bottom: 0.9rem;
+        }
+
+        .schedule-card p {
+            font-size: 0.92rem;
+            color: #2c3e5c;
+            margin-bottom: 0.9rem;
+        }
+
+        .calc-list {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #2c3e5c;
+        }
+
+        .calc-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.45rem 0;
+            border-top: 1px dashed #e3ecf7;
+        }
+
+        .calc-list li:first-child {
+            border-top: none;
+        }
+
+        .calc-list .calc-value {
+            font-weight: 600;
+            color: #0a2647;
+        }
+
+        .calc-total {
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 2px solid #cbdef5;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a2647;
+        }
+
+        .calc-total .calc-value {
+            color: #1a6bc4;
+        }
+
+        /* ----- ПРИМЕЧАНИЕ ----- */
+        .note {
+            background: #ebf3fc;
+            border-left: 6px solid #1a6bc4;
+            border-radius: 16px 6px 16px 6px;
+            padding: 1rem 1.4rem;
+            font-size: 0.92rem;
+            color: #1e3a5f;
+        }
+
+        /* ----- КНОПКА ОТКЛИКА ----- */
+        .apply-section {
+            text-align: center;
+            margin-top: 2.6rem;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background: #1a6bc4;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1rem 2.6rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 24px rgba(26, 107, 196, 0.25);
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .apply-button:hover {
+            background: #0a2647;
+            transform: translateY(-3px);
+        }
+
+        /* ----- ПОДВАЛ ----- */
+        .site-footer {
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 2px solid #e6edf6;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .footer-company {
+            font-size: 0.98rem;
+            color: #1e293b;
+            max-width: 480px;
+        }
+
+        .footer-company strong {
+            color: #0a2647;
+            font-size: 1.05rem;
+        }
+
+        .footer-contacts {
+            font-size: 0.92rem;
+            color: #5b6f87;
+            line-height: 1.7;
+        }
+
+        .footer-contacts a {
+            color: #1a6bc4;
+            text-decoration: none;
+        }
+
+        .footer-contacts a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .container { padding: 1.6rem 1.2rem 2rem; border-radius: 28px; }
+            .page-title { font-size: 2rem; }
+            .navbar { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+            .navbar-links { gap: 1rem; font-size: 0.9rem; }
+            .apply-button { width: 100%; text-align: center; }
+            .site-footer { flex-direction: column; gap: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <nav class="navbar">
+            <div class="navbar-brand">Инженер по эксплуатации сети</div>
+            <ul class="navbar-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="salary.html" class="active">Зарплата</a></li>
+                <li><a href="skills.html">Навыки</a></li>
+                <li><a href="#footer">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <h1 class="page-title">Заработная <span class="accent">плата</span></h1>
+        <div class="page-sub">Из чего складывается доход и как он считается на разных графиках</div>
+
+        <!-- ИЗ ЧЕГО СКЛАДЫВАЕТСЯ ОКЛАД -->
+        <section>
+            <div class="section-title">Из чего строится оклад</div>
+            <div class="section-sub">Итоговый доход инженера — это не одна цифра, а сумма нескольких частей</div>
+
+            <div class="components">
+                <div class="component-card">
+                    <span class="comp-icon">🏗️</span>
+                    <div class="comp-title">Базовый оклад</div>
+                    <div class="comp-text">
+                        Фиксированная часть за грейд и норму часов в месяц —
+                        <span class="highlight">основа расчёта</span>, не зависит от смен.
+                    </div>
+                </div>
+                <div class="component-card">
+                    <span class="comp-icon">🌙</span>
+                    <div class="comp-title">Надбавка за ночные часы</div>
+                    <div class="comp-text">
+                        Часы работы с 22:00 до 6:00 оплачиваются с коэффициентом
+                        <span class="highlight">×1,2</span> от часовой ставки.
+                    </div>
+                </div>
+                <div class="component-card">
+                    <span class="comp-icon">📅</span>
+                    <div class="comp-title">Надбавка за выходные и праздники</div>
+                    <div class="comp-text">
+                        Смены, выпавшие на выходной или праздничный день, оплачиваются
+                        <span class="highlight">в двойном размере</span>.
+                    </div>
+                </div>
+                <div class="component-card">
+                    <span class="comp-icon">🎯</span>
+                    <div class="comp-title">Премия</div>
+                    <div class="comp-text">
+                        Ежемесячная премия <span class="highlight">до 20%</span> от оклада
+                        за выполнение KPI по аварийности и срокам реагирования.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СРАВНЕНИЕ ГРАФИКОВ 2/2 И 5/2 -->
+        <section>
+            <div class="section-title">Как считается оклад на графике 2/2 и 5/2</div>
+            <div class="section-sub">Оба примера — для грейда «Инженер» с часовой ставкой 500 ₽/час</div>
+
+            <div class="schedule-grid">
+
+                <!-- ГРАФИК 2/2 -->
+                <div class="schedule-card">
+                    <span class="schedule-tag">Сменный график</span>
+                    <h3>2/2 (по 12 часов)</h3>
+                    <p>
+                        Два рабочих дня по 12 часов, затем два выходных. Часть смен приходится
+                        на ночное время и выходные, поэтому в расчёт добавляются надбавки.
+                    </p>
+                    <ul class="calc-list">
+                        <li><span>Часов в месяц (в среднем)</span><span class="calc-value">180 ч</span></li>
+                        <li><span>Из них ночных (22:00–6:00)</span><span class="calc-value">60 ч</span></li>
+                        <li><span>Базовая оплата: 180 ч × 500 ₽</span><span class="calc-value">90 000 ₽</span></li>
+                        <li><span>Ночная надбавка: 60 ч × 500 ₽ × 0,2</span><span class="calc-value">+6 000 ₽</span></li>
+                        <li><span>Премия за KPI (10%)</span><span class="calc-value">+9 000 ₽</span></li>
+                    </ul>
+                    <div class="calc-total"><span>Итого за месяц</span><span class="calc-value">≈ 105 000 ₽</span></div>
+                </div>
+
+                <!-- ГРАФИК 5/2 -->
+                <div class="schedule-card">
+                    <span class="schedule-tag">Стандартный график</span>
+                    <h3>5/2 (по 8 часов)</h3>
+                    <p>
+                        Пять рабочих дней по 8 часов, выходные — суббота и воскресенье.
+                        Ночные и «плавающие» смены практически отсутствуют.
+                    </p>
+                    <ul class="calc-list">
+                        <li><span>Часов в месяц (в среднем)</span><span class="calc-value">168 ч</span></li>
+                        <li><span>Из них ночных</span><span class="calc-value">0 ч</span></li>
+                        <li><span>Базовая оплата: 168 ч × 500 ₽</span><span class="calc-value">84 000 ₽</span></li>
+                        <li><span>Ночная надбавка</span><span class="calc-value">—</span></li>
+                        <li><span>Премия за KPI (10%)</span><span class="calc-value">+8 400 ₽</span></li>
+                    </ul>
+                    <div class="calc-total"><span>Итого за месяц</span><span class="calc-value">≈ 92 400 ₽</span></div>
+                </div>
+            </div>
+
+            <div class="note" style="margin-top: 1.4rem;">
+                При графике 2/2 итоговая сумма обычно выше за счёт ночных и праздничных
+                надбавок, хотя базовая ставка одинакова для обоих графиков. Точные цифры
+                зависят от количества смен в конкретном месяце и региональных коэффициентов.
+            </div>
+        </section>
+
+        <div class="apply-section">
+            <a class="apply-button" href="application.html">Откликнуться на работу</a>
+        </div>
+
+        <footer class="site-footer" id="footer">
+            <div class="footer-company">
+                <strong>АО «ЭР-Телеком Холдинг»</strong><br />
+                Вакансия размещена компанией «ЭР-Телеком» — одним из крупнейших
+                телекоммуникационных операторов России, развивающим сети связи,
+                интернет и цифровые сервисы для дома и бизнеса.
+            </div>
+            <div class="footer-contacts">
+                Телефон: <a href="tel:+78002000800">8 800 200-0-800</a><br />
+                Почта: <a href="mailto:hr@er-telecom.ru">hr@er-telecom.ru</a><br />
+                Сайт: <a href="https://www.er-telecom.ru" target="_blank" rel="noopener">er-telecom.ru</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

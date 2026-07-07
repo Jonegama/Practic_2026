@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Заявка на работу — Инженер по эксплуатации сети</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f2f6fc;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page {
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* ----- ВЕРХНЯЯ НАВИГАЦИЯ / ССЫЛКА НАЗАД ----- */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #1a6bc4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ----- ШАПКА ФОРМЫ (в стиле Google Forms: цветная полоса сверху) ----- */
+        .form-header {
+            background: #ffffff;
+            border-radius: 20px 20px 4px 4px;
+            border-top: 10px solid #1a6bc4;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.05);
+            padding: 2rem 2.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0a2647;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #5b6f87;
+            font-size: 0.98rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .form-header .required-note {
+            font-size: 0.85rem;
+            color: #b4232f;
+        }
+
+        /* ----- КАРТОЧКИ ВОПРОСОВ ----- */
+        .field-card {
+            background: #ffffff;
+            border-radius: 4px;
+            border-left: 4px solid transparent;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.05);
+            padding: 1.4rem 2.2rem 1.7rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.15s ease;
+        }
+
+        .field-card:focus-within {
+            border-left-color: #1a6bc4;
+        }
+
+        .field-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 0.9rem;
+        }
+
+        .field-label .req {
+            color: #b4232f;
+            margin-left: 0.15rem;
+        }
+
+        .field-input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #d7e2ef;
+            padding: 0.5rem 0.1rem;
+            font-size: 0.98rem;
+            color: #1e293b;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .field-input:focus {
+            border-bottom: 2px solid #1a6bc4;
+        }
+
+        .field-hint {
+            font-size: 0.82rem;
+            color: #93a3b8;
+            margin-top: 0.5rem;
+        }
+
+        .field-error {
+            font-size: 0.82rem;
+            color: #b4232f;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .field-card.invalid .field-input {
+            border-bottom-color: #b4232f;
+        }
+
+        .field-card.invalid .field-error {
+            display: block;
+        }
+
+        /* ----- ЗОНА ЗАГРУЗКИ РЕЗЮМЕ (drag & drop) ----- */
+        .dropzone {
+            border: 2px dashed #b9cde7;
+            border-radius: 16px;
+            padding: 2rem 1.4rem;
+            text-align: center;
+            background: #f8fbff;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .dropzone.dragover {
+            background: #e8f1fc;
+            border-color: #1a6bc4;
+        }
+
+        .dropzone-icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        .dropzone-text {
+            color: #2c3e5c;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .dropzone-text strong {
+            color: #1a6bc4;
+        }
+
+        .dropzone-sub {
+            color: #93a3b8;
+            font-size: 0.82rem;
+        }
+
+        .dropzone input[type="file"] {
+            display: none;
+        }
+
+        .file-preview {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            background: #ebf3fc;
+            border-radius: 12px;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            color: #0a2647;
+        }
+
+        .file-preview .file-name {
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .file-preview .file-remove {
+            color: #b4232f;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+            background: none;
+            border: none;
+            font-size: 0.85rem;
+        }
+
+        /* ----- КНОПКА ОТПРАВКИ ----- */
+        .submit-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.4rem;
+            padding: 0 0.2rem;
+        }
+
+        .submit-btn {
+            background: #1a6bc4;
+            color: #ffffff;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.85rem 2.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(26, 107, 196, 0.2);
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #0a2647;
+            transform: translateY(-2px);
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #5b6f87;
+            font-size: 0.92rem;
+            cursor: pointer;
+        }
+
+        .clear-btn:hover {
+            color: #1a6bc4;
+        }
+
+        /* ----- ЭКРАН ПОСЛЕ ОТПРАВКИ ----- */
+        .success-card {
+            display: none;
+            background: #ffffff;
+            border-radius: 20px;
+            border-top: 10px solid #1a6bc4;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.05);
+            padding: 2.6rem 2.2rem;
+            text-align: center;
+        }
+
+        .success-card .icon {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .success-card h2 {
+            color: #0a2647;
+            font-size: 1.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .success-card p {
+            color: #5b6f87;
+            font-size: 0.98rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .success-card a {
+            color: #1a6bc4;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .success-card a:hover {
+            text-decoration: underline;
+        }
+
+        footer.mini-footer {
+            text-align: center;
+            color: #93a3b8;
+            font-size: 0.85rem;
+            margin: 1.6rem 0 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-header,
+            .field-card {
+                padding-left: 1.3rem;
+                padding-right: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <a class="back-link" href="index.html">&larr; Назад к описанию вакансии</a>
+
+        <form id="applyForm" novalidate>
+
+            <div class="form-header">
+                <h1>Заявка: Инженер по эксплуатации сети</h1>
+                <p>Заполните форму, и мы свяжемся с вами в течение 2 рабочих дней.
+                Вакансия от компании «ЭР-Телеком».</p>
+                <div class="required-note">* обязательные поля</div>
+            </div>
+
+            <!-- ФАМИЛИЯ -->
+            <div class="field-card" data-field>
+                <div class="field-label">Фамилия<span class="req">*</span></div>
+                <input class="field-input" type="text" name="lastName" required placeholder="Ваш ответ" />
+                <div class="field-error">Пожалуйста, заполните это поле.</div>
+            </div>
+
+            <!-- ИМЯ -->
+            <div class="field-card" data-field>
+                <div class="field-label">Имя<span class="req">*</span></div>
+                <input class="field-input" type="text" name="firstName" required placeholder="Ваш ответ" />
+                <div class="field-error">Пожалуйста, заполните это поле.</div>
+            </div>
+
+            <!-- ОТЧЕСТВО -->
+            <div class="field-card" data-field>
+                <div class="field-label">Отчество</div>
+                <input class="field-input" type="text" name="middleName" placeholder="Ваш ответ" />
+            </div>
+
+            <!-- ПОЧТА -->
+            <div class="field-card" data-field>
+                <div class="field-label">Почта<span class="req">*</span></div>
+                <input class="field-input" type="email" name="email" required placeholder="name@example.com" />
+                <div class="field-error">Пожалуйста, укажите корректный адрес электронной почты.</div>
+            </div>
+
+            <!-- ТЕЛЕФОН -->
+            <div class="field-card" data-field>
+                <div class="field-label">Номер телефона<span class="req">*</span></div>
+                <input class="field-input" type="tel" name="phone" required placeholder="+7 (___) ___-__-__" />
+                <div class="field-error">Пожалуйста, укажите номер телефона.</div>
+            </div>
+
+            <!-- СОЦСЕТЬ -->
+            <div class="field-card" data-field>
+                <div class="field-label">Ссылка на социальную сеть</div>
+                <input class="field-input" type="url" name="social" placeholder="https://..." />
+                <div class="field-hint">Например, профиль в VK, Telegram или LinkedIn</div>
+            </div>
+
+            <!-- РЕЗЮМЕ (drag & drop) -->
+            <div class="field-card" data-field>
+                <div class="field-label">Прикрепить резюме<span class="req">*</span></div>
+                <div class="dropzone" id="dropzone">
+                    <span class="dropzone-icon">📄</span>
+                    <div class="dropzone-text">Перетащите файл сюда или <strong>выберите на компьютере</strong></div>
+                    <div class="dropzone-sub">PDF, DOC, DOCX — до 10 МБ</div>
+                    <input type="file" id="resumeInput" name="resume" accept=".pdf,.doc,.docx" />
+                </div>
+                <div class="file-preview" id="filePreview">
+                    <span class="file-name" id="fileName"></span>
+                    <button type="button" class="file-remove" id="fileRemove">Удалить</button>
+                </div>
+                <div class="field-error" id="resumeError">Пожалуйста, прикрепите файл резюме.</div>
+            </div>
+
+            <div class="submit-row">
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+                <button type="reset" class="clear-btn" id="clearBtn">Очистить форму</button>
+            </div>
+        </form>
+
+        <div class="success-card" id="successCard">
+            <div class="icon">✅</div>
+            <h2>Заявка отправлена</h2>
+            <p>Спасибо! Мы получили вашу заявку и резюме. Специалист отдела подбора персонала
+            компании «ЭР-Телеком» свяжется с вами в ближайшее время.</p>
+            <a href="index.html">Вернуться к описанию вакансии</a>
+        </div>
+
+        <footer class="mini-footer">© ЭР-Телеком · hr@er-telecom.ru · 8 800 200-0-800</footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('applyForm');
+        const dropzone = document.getElementById('dropzone');
+        const resumeInput = document.getElementById('resumeInput');
+        const filePreview = document.getElementById('filePreview');
+        const fileNameEl = document.getElementById('fileName');
+        const fileRemove = document.getElementById('fileRemove');
+        const resumeError = document.getElementById('resumeError');
+        const resumeCard = resumeInput.closest('.field-card');
+        const successCard = document.getElementById('successCard');
+        const clearBtn = document.getElementById('clearBtn');
+
+        let attachedFile = null;
+
+        function showFile(file) {
+            attachedFile = file;
+            fileNameEl.textContent = `${file.name} (${(file.size / 1024).toFixed(0)} КБ)`;
+            filePreview.style.display = 'flex';
+            dropzone.style.display = 'none';
+            resumeCard.classList.remove('invalid');
+        }
+
+        function clearFile() {
+            attachedFile = null;
+            resumeInput.value = '';
+            filePreview.style.display = 'none';
+            dropzone.style.display = 'block';
+        }
+
+        dropzone.addEventListener('click', () => resumeInput.click());
+
+        resumeInput.addEventListener('change', () => {
+            if (resumeInput.files.length) {
+                showFile(resumeInput.files[0]);
+            }
+        });
+
+        ['dragenter', 'dragover'].forEach(evt => {
+            dropzone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            });
+        });
+
+        ['dragleave', 'dragend'].forEach(evt => {
+            dropzone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+            });
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                // Синхронизируем со скрытым input, чтобы файл ушёл вместе с формой
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                resumeInput.files = dt.files;
+                showFile(file);
+            }
+        });
+
+        fileRemove.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clearFile();
+        });
+
+        clearBtn.addEventListener('click', () => {
+            setTimeout(clearFile, 0);
+            document.querySelectorAll('.field-card').forEach(c => c.classList.remove('invalid'));
+        });
+
+        function validate() {
+            let valid = true;
+
+            document.querySelectorAll('.field-input[required]').forEach(input => {
+                const card = input.closest('.field-card');
+                const filled = input.value.trim() !== '';
+                const emailOk = input.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+                if (!filled || !emailOk) {
+                    card.classList.add('invalid');
+                    valid = false;
+                } else {
+                    card.classList.remove('invalid');
+                }
+            });
+
+            if (!attachedFile) {
+                resumeCard.classList.add('invalid');
+                resumeError.style.display = 'block';
+                valid = false;
+            } else {
+                resumeCard.classList.remove('invalid');
+                resumeError.style.display = 'none';
+            }
+
+            return valid;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!validate()) return;
+
+            // Здесь в реальном проекте данные и файл (attachedFile) отправляются на сервер,
+            // например через fetch('/api/apply', { method: 'POST', body: new FormData(form) })
+            form.style.display = 'none';
+            successCard.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
