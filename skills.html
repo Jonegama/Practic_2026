@@ -6,6 +6,10 @@
     <title>Навыки — Инженер по эксплуатации сети</title>
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -209,6 +213,51 @@
             color: #1e3a5f;
         }
 
+        /* ----- КАК НАЧАТЬ РАБОТУ СТУДЕНТУ ----- */
+        .student-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .student-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #ebf3fc;
+            border-radius: 16px;
+            padding: 1rem 1.3rem;
+        }
+
+        .student-step .step-number {
+            flex: 0 0 auto;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1a6bc4;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .student-step .step-text {
+            font-size: 0.95rem;
+            color: #1e3a5f;
+        }
+
+        .student-step .step-text strong {
+            color: #0a2647;
+        }
+
+        .student-note {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            color: #5b6f87;
+        }
+
         /* ----- КНОПКА ОТКЛИКА ----- */
         .apply-section {
             text-align: center;
@@ -368,6 +417,45 @@
             </div>
         </section>
 
+        <!-- КАК НАЧАТЬ РАБОТУ СТУДЕНТУ -->
+        <section id="students">
+            <div class="section-title">Как начать работу студенту</div>
+            <div class="section-sub">Профессию можно освоить ещё во время учёбы — вот с чего начать</div>
+
+            <div class="student-steps">
+                <div class="student-step">
+                    <span class="step-number">1</span>
+                    <div class="step-text"><strong>Освойте базу</strong> — изучите основы сетевых протоколов
+                    (TCP/IP) и пройдите вводные курсы по администрированию сетей, многие доступны бесплатно онлайн.</div>
+                </div>
+                <div class="student-step">
+                    <span class="step-number">2</span>
+                    <div class="step-text"><strong>Пройдите стажировку</strong> — «ЭР-Телеком Холдинг» регулярно
+                    открывает стажировки для студентов технических специальностей 3–4 курсов и колледжей связи.</div>
+                </div>
+                <div class="student-step">
+                    <span class="step-number">3</span>
+                    <div class="step-text"><strong>Начните с позиции «Стажёр/Junior»</strong> — опыт не обязателен,
+                    важны база знаний и готовность учиться под наставничеством опытных инженеров.</div>
+                </div>
+                <div class="student-step">
+                    <span class="step-number">4</span>
+                    <div class="step-text"><strong>Совмещайте с учёбой</strong> — доступен гибкий график для студентов
+                    очной формы обучения на время сессий и практики.</div>
+                </div>
+                <div class="student-step">
+                    <span class="step-number">5</span>
+                    <div class="step-text"><strong>Растите внутри компании</strong> — большинство ведущих инженеров
+                    и руководителей групп начинали именно со стажёрских позиций.</div>
+                </div>
+            </div>
+
+            <div class="student-note">
+                Подходящее образование: студенты и выпускники профильных специальностей —
+                связь, телекоммуникации, электроника, информационные технологии.
+            </div>
+        </section>
+
         <div class="apply-section">
             <a class="apply-button" href="application.html">Откликнуться на работу</a>
         </div>
@@ -375,7 +463,7 @@
         <footer class="site-footer" id="footer">
             <div class="footer-company">
                 <strong>АО «ЭР-Телеком Холдинг»</strong><br />
-                Вакансия размещена компанией «ЭР-Телеком» — одним из крупнейших
+                Вакансия размещена компанией «ЭР-Телеком Холдинг» — одним из крупнейших
                 телекоммуникационных операторов России, развивающим сети связи,
                 интернет и цифровые сервисы для дома и бизнеса.
             </div>

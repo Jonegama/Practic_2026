@@ -11,6 +11,10 @@
     -->
     <style>
         /* ----- ГЛОБАЛЬНЫЙ СБРОС И БАЗА ----- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -302,6 +306,151 @@
             text-decoration: underline;
         }
 
+        /* ----- КАРТОЧКА "ИНФОРМАЦИЯ ДЛЯ СТУДЕНТОВ" ----- */
+        .student-card {
+            margin-top: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: #0a2647;
+            border-radius: 20px;
+            padding: 1.3rem 1.6rem;
+            flex-wrap: wrap;
+        }
+
+        .student-card .student-icon {
+            font-size: 2rem;
+            flex: 0 0 auto;
+        }
+
+        .student-card .student-text {
+            flex: 1 1 260px;
+            color: #dce8f8;
+            font-size: 0.95rem;
+        }
+
+        .student-card .student-text strong {
+            color: #ffffff;
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .student-card a {
+            flex: 0 0 auto;
+            background: #1a6bc4;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.3rem;
+            border-radius: 40px;
+            white-space: nowrap;
+            transition: background 0.2s ease;
+        }
+
+        .student-card a:hover {
+            background: #2c85e0;
+        }
+
+        /* ----- ЗАДАЧИ В РАМКАХ КОМПЕТЕНЦИЙ ----- */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #fafdff;
+            border: 1px solid #e3ecf7;
+            border-radius: 16px;
+            padding: 0.9rem 1.2rem;
+        }
+
+        .task-number {
+            flex: 0 0 auto;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ebf3fc;
+            color: #1a6bc4;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-text {
+            font-size: 0.95rem;
+            color: #2c3e5c;
+        }
+
+        .task-text strong {
+            color: #0a2647;
+        }
+
+        /* ----- РАБОЧИЙ ДЕНЬ ----- */
+        .day-timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .day-step {
+            flex: 1 1 220px;
+            background: #fafdff;
+            border: 1px solid #e3ecf7;
+            border-radius: 18px;
+            padding: 1.2rem 1.3rem;
+            position: relative;
+        }
+
+        .day-step .day-time {
+            display: inline-block;
+            background: #ebf3fc;
+            color: #1a6bc4;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            margin-bottom: 0.6rem;
+        }
+
+        .day-step .day-text {
+            font-size: 0.92rem;
+            color: #2c3e5c;
+        }
+
+        /* ----- ПОЧЕМУ ЭТО ВАЖНО ----- */
+        .importance {
+            background: #ebf3fc;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            display: flex;
+            gap: 1.6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .importance .importance-icon {
+            font-size: 2.6rem;
+            flex: 0 0 auto;
+        }
+
+        .importance .importance-text {
+            flex: 1 1 420px;
+            font-size: 1rem;
+            color: #1e3a5f;
+        }
+
+        .importance .importance-text strong {
+            color: #0a2647;
+        }
+
         /* ----- 5. МОТИВАЦИОННАЯ ЦИТАТА ----- */
         .quote {
             text-align: center;
@@ -467,6 +616,22 @@
             .site-footer {
                 flex-direction: column;
                 gap: 1.2rem;
+            }
+
+            .student-card {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .student-card a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .importance {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
@@ -641,6 +806,89 @@
                 Подробный расчёт заработной платы и разбивку по графикам 2/2 и 5/2 смотрите
                 на странице <a href="salary.html">«Зарплата»</a>.
             </div>
+
+            <div class="student-card">
+                <span class="student-icon">🎓</span>
+                <div class="student-text">
+                    <strong>Информация для студентов</strong>
+                    Как начать карьеру ещё во время учёбы: стажировки, требования к навыкам
+                    и первые шаги в профессии.
+                </div>
+                <a href="skills.html#students">Узнать подробнее</a>
+            </div>
+        </section>
+
+        <!-- ЗАДАЧИ В РАМКАХ КОМПЕТЕНЦИЙ -->
+        <section>
+            <div class="section-title">Чем занимается инженер</div>
+            <div class="section-sub">Основные задачи, которые сотрудник выполняет в рамках своих компетенций</div>
+
+            <div class="task-list">
+                <div class="task-item">
+                    <span class="task-number">1</span>
+                    <div class="task-text"><strong>Мониторинг сети</strong> — контроль состояния оборудования и каналов связи по системам мониторинга в режиме реального времени</div>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">2</span>
+                    <div class="task-text"><strong>Диагностика и устранение аварий</strong> — поиск причины сбоя и восстановление связи в кратчайшие сроки</div>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">3</span>
+                    <div class="task-text"><strong>Плановое техническое обслуживание</strong> — профилактические работы на узлах связи и серверном оборудовании</div>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">4</span>
+                    <div class="task-text"><strong>Настройка и ввод оборудования в эксплуатацию</strong> — первичная конфигурация коммутаторов, маршрутизаторов и базовых станций</div>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">5</span>
+                    <div class="task-text"><strong>Ведение технической документации</strong> — фиксация инцидентов, отчётность по выполненным работам</div>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">6</span>
+                    <div class="task-text"><strong>Выездное обслуживание</strong> — работа на объектах: базовых станциях, узлах связи, кабельной инфраструктуре</div>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">7</span>
+                    <div class="task-text"><strong>Взаимодействие со смежными службами</strong> — координация с диспетчерами, абонентской службой и подрядчиками при устранении неполадок</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КАК ПРОХОДИТ РАБОЧИЙ ДЕНЬ -->
+        <section>
+            <div class="section-title">Как проходит рабочий день</div>
+            <div class="section-sub">Краткий ориентир по типичной смене инженера</div>
+
+            <div class="day-timeline">
+                <div class="day-step">
+                    <span class="day-time">Начало смены</span>
+                    <div class="day-text">Приёмка смены: проверка алертов, ознакомление с текущими инцидентами и задачами от предыдущей смены.</div>
+                </div>
+                <div class="day-step">
+                    <span class="day-time">В течение дня</span>
+                    <div class="day-text">Плановые работы, реагирование на новые аварии, настройка оборудования, при необходимости — выезд на объект.</div>
+                </div>
+                <div class="day-step">
+                    <span class="day-time">Завершение смены</span>
+                    <div class="day-text">Фиксация выполненных работ в системе, передача открытых задач следующей смене.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПОЧЕМУ ЭТО ВАЖНО ДЛЯ ЭР-ТЕЛЕКОМ ХОЛДИНГ -->
+        <section>
+            <div class="section-title">Почему эта профессия важна для «ЭР-Телеком Холдинг»</div>
+            <div class="importance">
+                <span class="importance-icon">🔗</span>
+                <div class="importance-text">
+                    Инженеры по эксплуатации сети — это <strong>прямое звено между инфраструктурой
+                    и качеством связи</strong>, которое получают миллионы абонентов «ЭР-Телеком Холдинг».
+                    От их работы зависит бесперебойность интернета и цифровых сервисов для дома
+                    и бизнеса, скорость устранения аварий и, как следствие, доверие клиентов
+                    и репутация компании как надёжного оператора связи.
+                </div>
+            </div>
         </section>
 
         <!-- 5. МОТИВАЦИОННАЯ ЦИТАТА -->
@@ -658,7 +906,7 @@
         <footer class="site-footer" id="footer">
             <div class="footer-company">
                 <strong>АО «ЭР-Телеком Холдинг»</strong><br />
-                Вакансия размещена компанией «ЭР-Телеком» — одним из крупнейших
+                Вакансия размещена компанией «ЭР-Телеком Холдинг» — одним из крупнейших
                 телекоммуникационных операторов России, развивающим сети связи,
                 интернет и цифровые сервисы для дома и бизнеса.
             </div>
